@@ -2,14 +2,15 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
+PUBLISHED_CHOICES = (
+    ('private', 'private'),
+    ('shared', 'shared'),
+    ('public', 'public')
+)
+
 
 @python_2_unicode_compatible
 class Photo(models.Model):
-    PUBLISHED_CHOICES = (
-        ('private', 'private'),
-        ('shared', 'shared'),
-        ('public', 'public')
-    )
     user = models.ForeignKey(
         User,
         null=False
@@ -45,6 +46,32 @@ class Photo(models.Model):
 
 @python_2_unicode_compatible
 class Album(models.Model):
+    user = models.ForeignKey(
+        User,
+        null=False
+    )
+    photos = models.ManyToManyField(
+        Photo,
+        related_name='albums',
+    )
+    title = models.CharField(
+        max_length=200
+    )
+    description = models.TextField()
+    date_created = models.DateField(
+        auto_now_add=True
+    )
+    date_modified = models.DateField(
+        auto_now=True
+    )
+    date_published = models.DateField(
+        auto_now_add=True
+    )
+    published = models.CharField(
+        max_length=200,
+        choices=PUBLISHED_CHOICES,
+        default='private'
+    )
 
-    def __str__():
-        pass
+    def __str__(self):
+        return self.title

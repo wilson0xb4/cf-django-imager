@@ -19,10 +19,12 @@ class Photo(models.Model):
         upload_to='photo_files/%Y-%m-%d'
     )
     title = models.CharField(
-        max_length=200
+        max_length=200,
+        help_text='Enter a title for your photo.'
     )
     description = models.TextField(
-        blank=True
+        blank=True,
+        help_text='Enter a description of your photo.'
     )
     date_uploaded = models.DateField(
         auto_now_add=True
@@ -55,9 +57,13 @@ class Album(models.Model):
         related_name='albums',
     )
     title = models.CharField(
-        max_length=200
+        max_length=200,
+        help_text='Enter a title for your photo album.'
     )
-    description = models.TextField()
+    description = models.TextField(
+        blank=True,
+        help_text='Enter a description for your photo album.'
+    )
     date_created = models.DateField(
         auto_now_add=True
     )

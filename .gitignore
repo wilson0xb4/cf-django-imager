@@ -55,3 +55,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# keep empty media dir for deployment
+# but don't track actual media files
+media/*

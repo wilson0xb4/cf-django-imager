@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
@@ -63,6 +64,10 @@ class Album(models.Model):
     description = models.TextField(
         blank=True,
         help_text='Enter a description for your photo album.'
+    )
+    cover = models.ForeignKey(
+        Photo,
+        related_name='cover_to'
     )
     date_created = models.DateField(
         auto_now_add=True

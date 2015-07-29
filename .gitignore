@@ -62,4 +62,5 @@ target/
 media/*
 
 # dont load ssh deploy keys to github!
+# these keys are used for AWS EC2 deployment
 id_rsa*

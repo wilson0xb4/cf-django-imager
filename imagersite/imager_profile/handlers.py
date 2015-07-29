@@ -7,6 +7,7 @@ from .models import ImagerProfile
 
 @receiver(post_save, sender=User)
 def create_profile(sender, **kwargs):
+    """If a User is created, also create an ImagerProfile."""
     instance = kwargs.get('instance')
     if not instance or kwargs.get('raw', False):
         return
@@ -17,8 +18,21 @@ def create_profile(sender, **kwargs):
         instance.profile.save()
 
 
+@receiver(post_delete, sender=User)
+def delete_profile(sender, **kwargs):
+    """If a User is deleted, also delete their ImagerProfile."""
+    instance = kwargs.get('instance')
+    if not instance:
+        return
+    try:
+        instance.profile.delete()
+    except ImagerProfile.DoesNotExist:
+        pass
+
+
 @receiver(post_delete, sender=ImagerProfile)
 def delete_user(sender, **kwargs):
+    """If an ImagerProfile is deleted, also delete the User."""
     instance = kwargs.get('instance')
     if not instance:
         return

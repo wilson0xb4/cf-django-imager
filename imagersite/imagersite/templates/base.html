@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
 {# Load the tag library #}
 {% load bootstrap3 %}
 
@@ -8,3 +13,32 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
+
+    <title>imagr</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/colorful.css">
+  </head>
+  <body>
+
+    <header>
+      <h1><a href="">imager</a></h1>
+
+      <nav>
+        <ul>
+          <li><a href="">Profile</a></li>
+          <li><a href="">Library</a></li>
+          <li><a href="">login</a></li>
+          <li><a href="">log out</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+      <p>&copy; 2015 Andrew Wilson</p>
+    </footer>
+  </body>
+</html>

@@ -68,7 +68,8 @@ class Album(models.Model):
     cover = models.ForeignKey(
         Photo,
         related_name='cover_to',
-        null=True
+        null=True,
+        blank=True
     )
     date_created = models.DateField(
         auto_now_add=True

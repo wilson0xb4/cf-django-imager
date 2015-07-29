@@ -55,3 +55,12 @@ docs/_build/
 
 # PyBuilder
 target/
+
+
+# keep empty media dir for deployment
+# but don't track actual media files
+imagersite/media/*
+
+# dont load ssh deploy keys to github!
+# these keys are used for AWS EC2 deployment
+id_rsa*

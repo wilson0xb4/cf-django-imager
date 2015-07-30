@@ -24,6 +24,7 @@ SECRET_KEY = 'gx8*i_7^+ddawlnv=e($9o-8f6k*)*joe*0g6fneeq$s+7sw2p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -31,20 +32,38 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'bootstrap3',
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap3',
-    'registration',
     'imager_profile',
-    'imager_images'
+    'imager_images',
 )
 
-ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window; you may, of course, use a different value.
+ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
 REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
+
+# Settings for django-bootstrap3
+BOOTSTRAP3 = {
+    # The complete URL to the Bootstrap CSS file (None means no theme)
+    'theme_url': None,
+
+    # Label class to use in horizontal forms
+    'horizontal_label_class': 'col-md-3',
+    # Field class to use in horizontal forms
+    'horizontal_field_class': 'col-md-9',
+
+    'set_required': True,
+    'set_disabled': False,
+    'set_placeholder': True,
+
+    'error_css_class': 'bootstrap3-error',
+    'required_css_class': 'bootstrap3-required',
+}
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

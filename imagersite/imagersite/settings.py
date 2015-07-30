@@ -24,6 +24,7 @@ SECRET_KEY = 'gx8*i_7^+ddawlnv=e($9o-8f6k*)*joe*0g6fneeq$s+7sw2p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -31,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'bootstrap3',
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'imager_profile',
-    'imager_images'
+    'imager_images',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,7 +60,9 @@ ROOT_URLCONF = 'imagersite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'imagersite', 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,9 +109,39 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'imagersite', 'static'),
+]
 STATIC_URL = '/static/'
 
 # Media file handling
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Settings for django-bootstrap3
+BOOTSTRAP3 = {
+    # The complete URL to the Bootstrap CSS file (None means no theme)
+    'theme_url': os.path.join(STATIC_URL, 'style.css'),
+
+    # Label class to use in horizontal forms
+    'horizontal_label_class': 'col-md-3',
+    # Field class to use in horizontal forms
+    'horizontal_field_class': 'col-md-9',
+
+    'set_required': True,
+    'set_disabled': False,
+    'set_placeholder': True,
+
+    'error_css_class': 'bootstrap3-error',
+    'required_css_class': 'bootstrap3-required',
+}
+
+ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
+REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

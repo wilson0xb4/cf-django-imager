@@ -44,27 +44,6 @@ INSTALLED_APPS = (
     'imager_images',
 )
 
-ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
-REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
-
-# Settings for django-bootstrap3
-BOOTSTRAP3 = {
-    # The complete URL to the Bootstrap CSS file (None means no theme)
-    'theme_url': None,
-
-    # Label class to use in horizontal forms
-    'horizontal_label_class': 'col-md-3',
-    # Field class to use in horizontal forms
-    'horizontal_field_class': 'col-md-9',
-
-    'set_required': True,
-    'set_disabled': False,
-    'set_placeholder': True,
-
-    'error_css_class': 'bootstrap3-error',
-    'required_css_class': 'bootstrap3-required',
-}
-
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -130,9 +109,39 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'imagersite', 'static'),
+]
 STATIC_URL = '/static/'
 
 # Media file handling
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Settings for django-bootstrap3
+BOOTSTRAP3 = {
+    # The complete URL to the Bootstrap CSS file (None means no theme)
+    'theme_url': os.path.join(STATIC_URL, 'style.css'),
+
+    # Label class to use in horizontal forms
+    'horizontal_label_class': 'col-md-3',
+    # Field class to use in horizontal forms
+    'horizontal_field_class': 'col-md-9',
+
+    'set_required': True,
+    'set_disabled': False,
+    'set_placeholder': True,
+
+    'error_css_class': 'bootstrap3-error',
+    'required_css_class': 'bootstrap3-required',
+}
+
+ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
+REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

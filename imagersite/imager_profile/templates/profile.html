@@ -3,5 +3,17 @@
 {% block title %}imager profile{% endblock %}
 
 {% block content %}
-    This is <em>bootstrap3</em> for <strong>Django</strong>.
+    <br>
+    <p>username: {{ user.username }}</p>
+    <p>first name: {{ user.first_name|default:"who are you?" }}</p>
+    <p>last name: {{ user.last_name|default:"who are you?" }}</p>
+    <p>Last Login: {{ user.last_login }}</p>
+    <p>Member Since: {{ user.date_joined }}</p>
+    <br>
+    <p>camera: {{ user.profile.camera|default:"add your favorite camera!" }}</p>
+    <p>address: {{ user.profile.address|default:"add your address!" }}</p>
+    <p>website: <a href="{{ user.profile.website|default:"#" }}">{{ user.profile.website|default:"add your website!" }}</a></p>
+    <br>
+    <p>uploaded photos: {{ user.photo_set.count }}</p>
+    <p>albums created: {{ user.album_set.count }}</p>
 {% endblock %}

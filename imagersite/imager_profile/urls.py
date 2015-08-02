@@ -14,13 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 
 """urls begin with /profile/"""
 urlpatterns = [
     url(
         r'^$',
-        TemplateView.as_view(template_name='profile.html'),
+        login_required(
+            TemplateView.as_view(template_name='profile.html')
+        ),
         name='profile'
     ),
 ]

@@ -1,0 +1,33 @@
+{% extends 'lightbox.html' %}
+
+{% load thumbnail %}
+
+{% block title %}imager library: album{% endblock %}
+
+{% block content %}
+
+    <h2>{{ album.title|default:'No Album' }}</h2>
+    <p>{{ album.description }}</p>
+
+    <h2>Photos</h2>
+    <div id="links">
+    {% for photo in album.photos.all %}
+
+        {% thumbnail photo.image "200x200" crop="center" as im %}
+        <a href="{{ photo.image.url }}" data-gallery>
+            <img src="{{ im.url }}" alt="{{ photo.title }}">
+        </a>
+        {% endthumbnail %}
+
+    {% empty %}
+        <p>error: empty album or non-existent album</p>
+    {% endfor %}
+    </div>
+
+    <p>debug [
+        pk: {{ pk }},
+        title: {{ album.title }},
+        owner: {{ album.user }}
+    ]</p>
+
+{% endblock %}

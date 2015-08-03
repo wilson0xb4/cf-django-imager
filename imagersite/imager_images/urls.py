@@ -14,13 +14,42 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 
-"""urls begin with /library/"""
+from .views import AlbumView, PhotoView
+
+"""urls begin with /images/"""
 urlpatterns = [
+    # url(
+    #     r'^$',
+    #     login_required(
+    #         TemplateView.as_view(template_name='library.html')
+    #     ),
+    #     name='library'
+    # ),
+
     url(
-        r'^$',
-        TemplateView.as_view(template_name='library.html'),
+        r'^library/$',
+        login_required(
+            TemplateView.as_view(template_name='library.html')
+        ),
         name='library'
+    ),
+
+    url(
+        r'^album/(?P<pk>\d+)/$',
+        login_required(
+            AlbumView.as_view()
+        ),
+        name='album'
+    ),
+
+    url(
+        r'^photos/(?P<pk>\d+)/$',
+        login_required(
+            PhotoView.as_view()
+        ),
+        name='photo'
     ),
 ]

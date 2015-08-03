@@ -25,7 +25,7 @@ urlpatterns = [
         TemplateView.as_view(template_name='home.html'),
         name='home'
     ),
-    url(r'^library/', include('imager_images.urls')),
+    url(r'^images/', include('imager_images.urls')),
     url(r'^profile/', include('imager_profile.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.backends.default.urls')),

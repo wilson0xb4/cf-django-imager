@@ -1,0 +1,33 @@
+{% extends 'lightbox.html' %}
+
+{% load thumbnail %}
+
+{% block title %}imager library: photo{% endblock %}
+
+{% block content %}
+
+    <h2>{{ photo.title|default:'No Photo' }}</h2>
+    <p>{{ photo.description|default:'add a description!' }}</p>
+
+    <h2>Photos</h2>
+    <div id="links">
+
+    {% if photo %}
+        {% thumbnail photo.image "200x200" crop="center" as im %}
+        <a href="{{ photo.image.url }}" data-gallery>
+            <img src="{{ im.url }}" alt="{{ photo.title }}">
+        </a>
+        {% endthumbnail %}
+    {% else %}
+        <p>error: photo doesn't exist</p>
+    {% endif %}
+
+    </div>
+
+    <p>debug [
+        pk: {{ pk }},
+        title: {{ photo.title }},
+        owner: {{ photo.user }}
+    ]</p>
+
+{% endblock %}

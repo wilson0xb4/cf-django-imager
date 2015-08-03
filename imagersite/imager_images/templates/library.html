@@ -1,7 +1,49 @@
-{% extends 'base.html' %}
+{% extends 'lightbox.html' %}
+
+{% load staticfiles %}
+{% load thumbnail %}
 
 {% block title %}imager library{% endblock %}
 
 {% block content %}
-    This is <em>bootstrap3</em> for <strong>Django</strong>.
+
+    <h2>Albums</h2>
+    {% for album in user.album_set.all %}
+        <p>
+        {{ album.title }}
+        <br>
+
+        <a href="{% url 'album' album.pk %}">
+        {% if album.cover %}
+
+            {% thumbnail album.cover.image "200x200" crop="center" as im %}
+                <img src="{{ im.url }}" alt="{{ album.title }}">
+            {% endthumbnail %}
+
+        {% else %}
+            <img src="{% static '200x200.png' %}" alt="no cover image found">
+        {% endif %}
+        </a>
+
+        </p>
+
+    {% empty %}
+        <p>no albums yet</p>
+    {% endfor %}
+
+    <h2>Photos</h2>
+    <div id="links">
+    {% for photo in user.photo_set.all %}
+
+        {% thumbnail photo.image "200x200" crop="center" as im %}
+        <a href="{{ photo.image.url }}" data-gallery>
+            <img src="{{ im.url }}" alt="{{ photo.title }}">
+        </a>
+        {% endthumbnail %}
+
+    {% empty %}
+        <p>no photos yet</p>
+    {% endfor %}
+    </div>
+
 {% endblock %}

@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav">
 
                   {% if user.is_authenticated %}
-                  <li class="active"><a href="{% url 'home' %}">Home</a></li>
+                  <li><a href="{% url 'home' %}">Home</a></li>
                   <li><a href="{% url 'profile' %}">Profile</a></li>
                   <li><a href="{% url 'library' %}">Library</a></li>
                   {% endif %}
@@ -55,5 +55,7 @@
 
 
     </div>
+
+    {% block lightbox %}{% endblock %}
 
 {% endblock %}

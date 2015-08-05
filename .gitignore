@@ -64,3 +64,6 @@ imagersite/media/*
 # dont load ssh deploy keys to github!
 # these keys are used for AWS EC2 deployment
 id_rsa*
+
+# ignore list of environment variables
+.env_settings

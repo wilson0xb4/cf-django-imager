@@ -56,6 +56,7 @@ class Album(models.Model):
     photos = models.ManyToManyField(
         Photo,
         related_name='albums',
+        blank=True,
     )
     title = models.CharField(
         max_length=200,

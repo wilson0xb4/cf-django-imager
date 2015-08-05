@@ -1,5 +1,5 @@
-from django.views.generic import TemplateView
-from imager_images.models import Album, Photo
+from django.views.generic import TemplateView, CreateView, UpdateView
+from .models import Album, Photo
 
 
 class AlbumView(TemplateView):
@@ -7,14 +7,12 @@ class AlbumView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AlbumView, self).get_context_data(**kwargs)
-
         try:
             context['user'] = self.request.user
             album_set = self.request.user.album_set
             context['album'] = album_set.get(id=kwargs.get('pk'))
         except Album.DoesNotExist:
             pass
-
         return context
 
 
@@ -32,3 +30,43 @@ class PhotoView(TemplateView):
             pass
 
         return context
+
+
+class PhotoFormView(CreateView):
+    template_name = 'photoform.html'
+    model = Photo
+    fields = ['image', 'title', 'description']
+    success_url = '/images/library'
+
+    def form_valid(self, form):
+        photo = form.save(commit=False)
+        photo.user = self.request.user
+        return super(PhotoFormView, self).form_valid(form)
+
+
+class PhotoEditView(UpdateView):
+    template_name = 'photoupdateform.html'
+    model = Photo
+    fields = ['title', 'description']
+    success_url = '/images/library'
+
+
+class AlbumFormView(CreateView):
+    template_name = 'albumform.html'
+    fields = ['photos', 'title', 'description', 'cover', 'published']
+    model = Album
+    success_url = '/images/library'
+
+    def form_valid(self, form):
+        album = form.save(commit=False)
+        album.user = self.request.user
+        album.save()
+        form.save_m2m()
+        return super(AlbumFormView, self).form_valid(form)
+
+
+class AlbumEditView(UpdateView):
+    template_name = 'albumupdateform.html'
+    fields = ['photos', 'title', 'description', 'cover', 'published']
+    model = Album
+    success_url = '/images/library'

@@ -186,33 +186,6 @@ def apt_get_update():
     run_command_on_targeted_server(_apt_get_update)
 
 
-def _install_supervisor():
-    sudo('apt-get -y install supervisor')
-
-    server_name = env.active_instance.public_dns_name
-    local("scp -o StrictHostKeyChecking=no supervisord.conf ubuntu@" + server_name + ":~/")
-    sudo('mv ~/supervisord.conf /etc/supervisor/conf.d/')
-
-    sudo('service supervisor restart')
-
-
-def install_supervisor():
-    """Install supervisord, move conf file into place, start service.
-
-    Assumes supervisord.conf is in the same directory as the fabfile.
-    """
-    run_command_on_targeted_server(_install_supervisor)
-
-
-def _restart_supervisor():
-    sudo('service supervisor restart')
-
-
-def restart_supervisor():
-    """Can be used to restart supervisor after syncing app files."""
-    run_command_on_targeted_server(_restart_supervisor)
-
-
 def _install_git():
     sudo('apt-get -y install git')
 
@@ -296,11 +269,9 @@ def initial_deploy():
     git_clone()
     pip_update()
     install_nginx()
-    install_supervisor()
 
 
 def deploy():
     """sync files, check requirements file, and restart supervisor"""
     move_files()
     pip_update()
-    restart_supervisor()

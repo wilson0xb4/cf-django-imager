@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<section class='container profile'>
+  <form action={% url 'edit_profile' %} method="post" accept-charset="utf-8" enctype="multipart/form-data">
+  {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name="edit profile" value="Edit Profile">
+  </form>
+</section>
+{% else %}
+  <h1>Please Login.</h1>
+{% endif %}
+{% endblock %}

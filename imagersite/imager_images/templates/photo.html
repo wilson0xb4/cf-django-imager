@@ -7,7 +7,7 @@
 {% block content %}
 
     <h2>{{ photo.title|default:'No Photo' }}</h2>
-    <p>{{ photo.description|default:'add a description!' }}</p>
+    <p>{{ photo.description|default:'' }}</p>
 
     <h2>Photos</h2>
     <div id="links">

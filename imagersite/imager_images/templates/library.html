@@ -9,7 +9,7 @@
 
     <h2>Albums</h2>
     {% for album in user.album_set.all %}
-        <p>
+    <p>
         {{ album.title }}
         <br>
 
@@ -23,21 +23,21 @@
         {% else %}
             <img src="{% static '200x200.png' %}" alt="no cover image found">
         {% endif %}
-    <form action="{% url 'edit_album' album.pk %}"method="get">
-        <input type="submit" value="Edit Album"
-            name="Submit" id="frm1_submit" />
-    </form>
         </a>
 
-        </p>
+        <p><a href="{% url 'edit_album' album.pk %}">
+            <button type="button" class="btn btn-default">Edit Album</button>
+        </a></p>
+
+    </p>
 
     {% empty %}
         <p>no albums yet</p>
     {% endfor %}
-    <form action={% url 'add_album' %} method="get">
-        <input type="submit" value="Add Album"
-            name="Submit" id="frm1_submit" />
-    </form>
+
+    <p><a href="{% url 'add_album' %}">
+        <button type="button" class="btn btn-default">New Album</button>
+    </a></p>
 
     <h2>Photos</h2>
     <div id="links">
@@ -48,16 +48,18 @@
             <img src="{{ im.url }}" alt="{{ photo.title }}">
         </a>
         {% endthumbnail %}
-         <form action="{% url 'edit_photo' photo.pk %}"method="get">
-            <input type="submit" value="Edit Photo"
-                name="Submit" id="frm1_submit" />
-        </form>
+        <p><a href="{% url 'edit_photo' photo.pk %}">
+            <button type="button" class="btn btn-default">Edit Photo</button>
+        </a></p>
+
     {% empty %}
         <p>no photos yet</p>
     {% endfor %}
-    <form action={% url 'add_photo' %} method="get">
-        <input type="submit" value="Add Photo" id="frm1_submit" />
-    </form>
+
+    <p><a href="{% url 'add_photo' %}">
+        <button type="button" class="btn btn-default">New Photo</button>
+    </a></p>
+
     </div>
 
 {% endblock %}

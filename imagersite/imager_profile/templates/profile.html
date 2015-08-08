@@ -17,7 +17,8 @@
     <br>
     <p>uploaded photos: {{ user.photo_set.count }}</p>
     <p>albums created: {{ user.album_set.count }}</p>
-    <form action={% url 'edit_profile' %} method="get">
-        <input type="submit" value="Edit Profile"
-            name="Submit" id="frm1_submit" />
+
+    <p><a href="{% url 'edit_profile' %}">
+        <button type="button" class="btn btn-default">Edit Profile</button>
+    </a></p>
 {% endblock %}

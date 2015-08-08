@@ -1,16 +1,11 @@
 {% extends "base.html" %}
-{% load i18n %}
+
+{% block title %}imager photo: edit{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-<section class='container profile'>
-  <form action="{% url 'edit_photo' photo.pk %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-  {% csrf_token %}
+<form action="{% url 'edit_photo' photo.pk %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+    {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" name="edit" value="Edit Photo">
-  </form>
-</section>
-{% else %}
-  <h1>Please Login.</h1>
-{% endif %}
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
 {% endblock %}

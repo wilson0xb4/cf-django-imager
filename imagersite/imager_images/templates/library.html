@@ -9,7 +9,7 @@
 
     <h2>Albums</h2>
     {% for album in user.album_set.all %}
-        <p>
+    <p>
         {{ album.title }}
         <br>
 
@@ -25,11 +25,19 @@
         {% endif %}
         </a>
 
-        </p>
+        <p><a href="{% url 'edit_album' album.pk %}">
+            <button type="button" class="btn btn-default">Edit Album</button>
+        </a></p>
+
+    </p>
 
     {% empty %}
         <p>no albums yet</p>
     {% endfor %}
+
+    <p><a href="{% url 'add_album' %}">
+        <button type="button" class="btn btn-success">New Album</button>
+    </a></p>
 
     <h2>Photos</h2>
     <div id="links">
@@ -40,10 +48,18 @@
             <img src="{{ im.url }}" alt="{{ photo.title }}">
         </a>
         {% endthumbnail %}
+        <p><a href="{% url 'edit_photo' photo.pk %}">
+            <button type="button" class="btn btn-default">Edit Photo</button>
+        </a></p>
 
     {% empty %}
         <p>no photos yet</p>
     {% endfor %}
+
+    <p><a href="{% url 'add_photo' %}">
+        <button type="button" class="btn btn-success">New Photo</button>
+    </a></p>
+
     </div>
 
 {% endblock %}

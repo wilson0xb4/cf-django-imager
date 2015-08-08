@@ -17,17 +17,11 @@ from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 
-from .views import AlbumView, PhotoView
+from .views import AlbumView, AlbumEditView, AlbumFormView, \
+    PhotoView, PhotoEditView, PhotoFormView
 
 """urls begin with /images/"""
 urlpatterns = [
-    # url(
-    #     r'^$',
-    #     login_required(
-    #         TemplateView.as_view(template_name='library.html')
-    #     ),
-    #     name='library'
-    # ),
 
     url(
         r'^library/$',
@@ -51,5 +45,38 @@ urlpatterns = [
             PhotoView.as_view()
         ),
         name='photo'
+    ),
+
+    url(
+        r'^photos/add',
+        login_required(
+            PhotoFormView.as_view()
+        ),
+        name='add_photo'
+    ),
+
+    url(
+        r'^photos/(?P<pk>\d+)/edit/$',
+        login_required(
+            PhotoEditView.as_view()
+        ),
+        name='edit_photo'
+    ),
+
+
+    url(
+        r'^album/add',
+        login_required(
+            AlbumFormView.as_view()
+        ),
+        name='add_album'
+    ),
+
+    url(
+        r'^album/(?P<pk>\d+)/edit/$',
+        login_required(
+            AlbumEditView.as_view()
+        ),
+        name='edit_album'
     ),
 ]

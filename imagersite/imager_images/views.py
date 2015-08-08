@@ -35,7 +35,7 @@ class PhotoView(TemplateView):
 class PhotoFormView(CreateView):
     template_name = 'photoform.html'
     model = Photo
-    fields = ['image', 'title', 'description']
+    fields = ['title', 'description', 'image']
     success_url = '/images/library'
 
     def form_valid(self, form):
@@ -53,9 +53,15 @@ class PhotoEditView(UpdateView):
 
 class AlbumFormView(CreateView):
     template_name = 'albumform.html'
-    fields = ['photos', 'title', 'description', 'cover', 'published']
+    fields = ['title', 'description', 'photos', 'cover', 'published']
     model = Album
     success_url = '/images/library'
+
+    def get_form(self):
+        form = super(AlbumFormView, self).get_form()
+        form.fields['photos'].queryset = self.request.user.photo_set.all()
+        form.fields['cover'].queryset = self.request.user.photo_set.all()
+        return form
 
     def form_valid(self, form):
         album = form.save(commit=False)
@@ -67,6 +73,12 @@ class AlbumFormView(CreateView):
 
 class AlbumEditView(UpdateView):
     template_name = 'albumupdateform.html'
-    fields = ['photos', 'title', 'description', 'cover', 'published']
+    fields = ['title', 'description', 'photos', 'cover', 'published']
     model = Album
     success_url = '/images/library'
+
+    def get_form(self):
+        form = super(AlbumEditView, self).get_form()
+        form.fields['photos'].queryset = self.request.user.photo_set.all()
+        form.fields['cover'].queryset = self.request.user.photo_set.all()
+        return form

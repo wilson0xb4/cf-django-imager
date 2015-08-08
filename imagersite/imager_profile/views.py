@@ -1,4 +1,4 @@
-from django.views.generic import FormView, UpdateView
+from django.views.generic import FormView
 from .models import ImagerProfile
 from .forms import ProfileSettingsForm
 

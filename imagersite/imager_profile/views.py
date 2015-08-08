@@ -10,9 +10,10 @@ class ProfileFormView(FormView):
 
     def get_form(self, form_class=ProfileSettingsForm):
         try:
-            profile = ImagerProfile.objects.get(user=self.request.user)
+            profile = self.request.user.profile
             return ProfileSettingsForm(
-                instance=profile, **self.get_form_kwargs())
+                instance=profile, **self.get_form_kwargs()
+            )
         except (TypeError, ImagerProfile.DoesNotExist):
             return ProfileSettingsForm(**self.get_form_kwargs())
 

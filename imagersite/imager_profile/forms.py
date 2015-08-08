@@ -19,7 +19,15 @@ class ProfileSettingsForm(forms.ModelForm):
 
     class Meta:
         model = ImagerProfile
-        fields = ['address', 'camera', 'photography_type', 'website']
+        fields = [
+            'first_name',
+            'last_name',
+            'email',
+            'address',
+            'camera',
+            'photography_type',
+            'website'
+        ]
 
     def save(self, *args, **kwargs):
         self.request = kwargs.pop("request")

@@ -38,7 +38,7 @@ class Photo(models.Model):
         blank=True
     )
     published = models.CharField(
-        max_length=200,
+        max_length=7,
         choices=PUBLISHED_CHOICES,
         default='private'
     )
@@ -82,7 +82,7 @@ class Album(models.Model):
         auto_now_add=True
     )
     published = models.CharField(
-        max_length=200,
+        max_length=7,
         choices=PUBLISHED_CHOICES,
         default='private'
     )

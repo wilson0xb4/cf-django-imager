@@ -22,13 +22,6 @@ from .views import AlbumView, AlbumEditView, AlbumFormView, \
 
 """urls begin with /images/"""
 urlpatterns = [
-    # url(
-    #     r'^$',
-    #     login_required(
-    #         TemplateView.as_view(template_name='library.html')
-    #     ),
-    #     name='library'
-    # ),
 
     url(
         r'^library/$',
@@ -63,7 +56,7 @@ urlpatterns = [
     ),
 
     url(
-        r'^photos/edit/(?P<pk>\d+)/$',
+        r'^photos/(?P<pk>\d+)/edit/$',
         login_required(
             PhotoEditView.as_view()
         ),
@@ -80,7 +73,7 @@ urlpatterns = [
     ),
 
     url(
-        r'^album/edit/(?P<pk>\d+)/$',
+        r'^album/(?P<pk>\d+)/edit/$',
         login_required(
             AlbumEditView.as_view()
         ),

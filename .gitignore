@@ -61,6 +61,9 @@ target/
 # but don't track actual media files
 imagersite/media/*
 
+# same for deployed static
+imagersite/static/*
+
 # dont load ssh deploy keys to github!
 # these keys are used for AWS EC2 deployment
 id_rsa*

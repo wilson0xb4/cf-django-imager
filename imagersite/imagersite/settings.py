@@ -105,10 +105,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'imagersite', 'static'),
 ]
 # not sure why this version didnt work?
-# STATIC_ROOT = os.environ.get(
-#     'IMAGER_STATIC_ROOT',
-#     os.path.join(BASE_DIR, 'imagersite', 'static')
-# )
+STATIC_ROOT = os.environ.get(
+    'STATIC_ROOT',
+    os.path.join(BASE_DIR, 'imagersite', 'static')
+)
 STATIC_URL = '/static/'
 
 # Media file handling

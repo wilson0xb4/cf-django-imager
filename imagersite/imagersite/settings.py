@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'imagersite.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {'default': dj_database_url.config(
-    default='postgres://@imagertest.cle5pikdvxtu.us-west-2.rds.amazonaws.com:5432/django_imager'
+    default='postgres://localhost:5432/django-imager'
 )}
 
 # Internationalization

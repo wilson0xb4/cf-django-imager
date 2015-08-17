@@ -7,7 +7,7 @@
 {% block content %}
 
     <h2>{{ album.title|default:'No Album' }}</h2>
-    <p>{{ album.description }}</p>
+    <p>{{ album.description|default:'' }}</p>
 
     <h2>Photos</h2>
     <div id="links">
@@ -20,14 +20,8 @@
         {% endthumbnail %}
 
     {% empty %}
-        <p>error: empty album or non-existent album</p>
+        <p>empty or non-existent album</p>
     {% endfor %}
     </div>
-
-    <p>debug [
-        pk: {{ pk }},
-        title: {{ album.title }},
-        owner: {{ album.user }}
-    ]</p>
 
 {% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}imager album: edit{% endblock %}
+
+{% block content %}
+<form action="{% url 'edit_album' album.pk %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% endblock %}

@@ -17,4 +17,8 @@
     <br>
     <p>uploaded photos: {{ user.photo_set.count }}</p>
     <p>albums created: {{ user.album_set.count }}</p>
+
+    <p><a href="{% url 'edit_profile' %}">
+        <button type="button" class="btn btn-default">Edit Profile</button>
+    </a></p>
 {% endblock %}

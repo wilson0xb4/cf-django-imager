@@ -101,15 +101,15 @@ USE_TZ = os.environ.get('IMAGER_USE_TZ', True)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
+# not sure why this version didnt work?
+STATIC_URL = '/static/'
+STATIC_ROOT = os.environ.get(
+    'STATIC_ROOT',
+    os.path.join(BASE_DIR, 'static')
+)
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'imagersite', 'static'),
 ]
-# not sure why this version didnt work?
-STATIC_ROOT = os.environ.get(
-    'STATIC_ROOT',
-    os.path.join(BASE_DIR, 'imagersite', 'static')
-)
-STATIC_URL = '/static/'
 
 # Media file handling
 MEDIA_ROOT = os.environ.get(

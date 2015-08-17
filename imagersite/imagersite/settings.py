@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,13 +21,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'gx8*i_7^+ddawlnv=e($9o-8f6k*)*joe*0g6fneeq$s+7sw2p'
+SECRET_KEY = os.environ.get('SECRET_KEY', None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 TEMPLATE_DEBUG = DEBUG
+THUMBNAIL_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split()
 
 
 # Application definition
@@ -83,30 +85,18 @@ WSGI_APPLICATION = 'imagersite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django-imager',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
-
+DATABASES = {'default': dj_database_url.config(
+    default='postgres://localhost:5432/django-imager'
+)}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
+TIME_ZONE = os.environ.get('IMAGER_TIME_ZONE', 'UTC')
+USE_I18N = os.environ.get('IMAGER_USE_I18N', True)
+USE_L10N = os.environ.get('IMAGER_USE_L10N', True)
+USE_TZ = os.environ.get('IMAGER_USE_TZ', True)
 
 
 # Static files (CSS, JavaScript, Images)
@@ -114,10 +104,18 @@ USE_TZ = True
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'imagersite', 'static'),
 ]
+# not sure why this version didnt work?
+# STATIC_ROOT = os.environ.get(
+#     'IMAGER_STATIC_ROOT',
+#     os.path.join(BASE_DIR, 'imagersite', 'static')
+# )
 STATIC_URL = '/static/'
 
 # Media file handling
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.environ.get(
+    'IMAGER_MEDIA_ROOT',
+    os.path.join(BASE_DIR, 'media')
+)
 MEDIA_URL = '/media/'
 
 # Settings for django-bootstrap3
@@ -143,7 +141,15 @@ REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/profile/'
 
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-else:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = os.environ.get(
+    'IMAGER_EMAIL_BACKEND',
+    'django.core.mail.backends.console.EmailBackend'
+)
+EMAIL_HOST = os.environ.get('EMAIL_HOST', None)
+EMAIL_PORT = os.environ.get('EMAIL_PORT', None)
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', None)
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', None)
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', None)
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', None)
+EMAIL_TIMEOUT = os.environ.get('EMAIL_TIMEOUT', None)
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

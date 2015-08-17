@@ -113,7 +113,7 @@ STATIC_URL = '/static/'
 
 # Media file handling
 MEDIA_ROOT = os.environ.get(
-    'IMAGER_MEDIA_ROOT',
+    'MEDIA_ROOT',
     os.path.join(BASE_DIR, 'media')
 )
 MEDIA_URL = '/media/'

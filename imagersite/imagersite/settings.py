@@ -93,10 +93,10 @@ DATABASES = {'default': dj_database_url.config(
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = os.environ.get('IMAGER_TIME_ZONE', 'UTC')
-USE_I18N = os.environ.get('IMAGER_USE_I18N', True)
-USE_L10N = os.environ.get('IMAGER_USE_L10N', True)
-USE_TZ = os.environ.get('IMAGER_USE_TZ', True)
+TIME_ZONE = os.environ.get('TIME_ZONE', 'UTC')
+USE_I18N = os.environ.get('USE_I18N', True)
+USE_L10N = os.environ.get('USE_L10N', True)
+USE_TZ = os.environ.get('USE_TZ', True)
 
 
 # Static files (CSS, JavaScript, Images)
@@ -142,7 +142,7 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/profile/'
 
 EMAIL_BACKEND = os.environ.get(
-    'IMAGER_EMAIL_BACKEND',
+    'EMAIL_BACKEND',
     'django.core.mail.backends.console.EmailBackend'
 )
 EMAIL_HOST = os.environ.get('EMAIL_HOST', None)

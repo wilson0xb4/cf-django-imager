@@ -136,11 +136,7 @@ BOOTSTRAP3 = {
     'required_css_class': 'bootstrap3-required',
 }
 
-ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
-REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/profile/'
-
 EMAIL_BACKEND = os.environ.get(
     'EMAIL_BACKEND',
     'django.core.mail.backends.console.EmailBackend'
@@ -149,7 +145,9 @@ EMAIL_HOST = os.environ.get('EMAIL_HOST', None)
 EMAIL_PORT = os.environ.get('EMAIL_PORT', None)
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', None)
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', None)
-EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', None)
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', None)
-EMAIL_TIMEOUT = os.environ.get('EMAIL_TIMEOUT', None)
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
+REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
+LOGIN_REDIRECT_URL = '/profile/'
